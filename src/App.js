@@ -1,38 +1,28 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
 import Discover from "./pages/Discover";
 import SongDetails from "./pages/SongDetails";
 import Sidebar from "./components/Sidebar";
 import Player from "./components/Player";
+import playerStore from "./store/playerStore";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const darkMode = playerStore((state) => state.darkMode);
 
   return (
     <BrowserRouter>
-      {/* GLOBAL THEME WRAPPER */}
       <div
         className={
           darkMode
-            ? "min-h-screen bg-gray-900 text-white"
-            : "min-h-screen bg-gray-100 text-black"
+            ? "min-h-screen bg-gray-900 text-white transition-all duration-300"
+            : "min-h-screen bg-gray-100 text-black transition-all duration-300"
         }
       >
         <div className="flex min-h-screen">
-          {/* ✅ PASS darkMode HERE */}
-          <Sidebar darkMode={darkMode} />
+          <Sidebar />
 
           <div className="flex-1">
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <Discover
-                    darkMode={darkMode}
-                    setDarkMode={setDarkMode}
-                  />
-                }
-              />
+              <Route path="/" element={<Discover />} />
               <Route path="/song/:id" element={<SongDetails />} />
             </Routes>
 

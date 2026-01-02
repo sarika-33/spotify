@@ -1,10 +1,14 @@
-export default function Sidebar({ darkMode }) {
+import usePlayerStore from "../store/playerStore";
+
+export default function Sidebar() {
+  const darkMode = usePlayerStore((state) => state.darkMode);
+
   return (
     <div
       className={
         darkMode
-          ? "w-60 min-h-screen bg-gray-900 text-white p-4"
-          : "w-60 min-h-screen bg-gray-100 text-black p-4 border-r"
+          ? "w-60 min-h-screen bg-gray-900 text-white p-4 transition-all duration-300"
+          : "w-60 min-h-screen bg-gray-100 text-black p-4 border-r transition-all duration-300"
       }
     >
       <h1 className="text-2xl font-bold mb-8">
